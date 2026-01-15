@@ -1,10 +1,21 @@
 <div class="flex mt-5 flex-col md:flex-row md:space-x-4">
   <div class="w-full mb-4 md:w-56">
+    <button
+      class="w-full mb-4 md:mb-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
+      (click)="resetCategories()">
+      Reset Categories
+    </button>
+      <button
+      class="w-full mb-4 md:mb-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
+      (click)="reloadCategories()">
+      reload Categories
+    </button>
     <ul class="text-center md:text-left">
       <li>
         <a routerLink="/">All</a>
       </li>
-      @for (category of categories(); track category) {
+
+      @for (category of categoriesResource.value(); track category) {
         <li>
           <a routerLink="/category/{{ category.slug }}">{{
             category.name
@@ -14,7 +25,7 @@
     </ul>
   </div>
   <div class="grid grid-cols-2 gap-8 w-full md:grid-cols-4">
-    @for (product of products(); track product) {
+    @for (product of productsResource.value(); track product) {
       <app-product [product]="product" (addToCart)="addToCart($event)" />
     }
   </div>

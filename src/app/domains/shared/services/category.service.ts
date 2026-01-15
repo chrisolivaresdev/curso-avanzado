@@ -14,4 +14,10 @@ export class CategoryService {
       `${environment.apiUrl}/api/v1/categories`,
     );
   }
+
+  async getAllPromise() {
+    const response = await fetch( `${environment.apiUrl}/api/v1/categories`)
+    const data = await response.json();
+    return data as Category[];
+  }
 }
