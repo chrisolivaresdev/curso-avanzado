@@ -1,12 +1,11 @@
 import {
   Component,
-  Input,
-  SimpleChanges,
   signal,
-  OnChanges,
   OnInit,
   AfterViewInit,
   OnDestroy,
+  input,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,10 +15,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './counter.component.html',
 })
 export class CounterComponent
-  implements OnChanges, OnInit, AfterViewInit, OnDestroy
+  implements OnInit, AfterViewInit, OnDestroy
 {
-  @Input({ required: true }) duration = 0;
-  @Input({ required: true }) message = '';
+  duration = input.required<number>()
+  message =  input.required<string>()
   counter = signal(0);
   counterRef: number | undefined;
 
@@ -29,18 +28,22 @@ export class CounterComponent
     // una vez
     console.log('constructor');
     console.log('-'.repeat(10));
+    effect(() => {
+      this.duration();
+     this.doSomething();
+    })
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // before and during render
-    console.log('ngOnChanges');
-    console.log('-'.repeat(10));
-    console.log(changes);
-    const duration = changes['duration'];
-    if (duration && duration.currentValue !== duration.previousValue) {
-      this.doSomething();
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   // before and during render
+  //   console.log('ngOnChanges');
+  //   console.log('-'.repeat(10));
+  //   console.log(changes);
+  //   const duration = changes['duration'];
+  //   if (duration && duration.currentValue !== duration.previousValue) {
+  //     this.doSomething();
+  //   }
+  // }
 
   ngOnInit() {
     // after render
