@@ -7,11 +7,11 @@ import {
   input,
   effect,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-counter',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './counter.component.html',
 })
 export class CounterComponent
