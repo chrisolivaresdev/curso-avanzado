@@ -2,7 +2,6 @@ import {
   Component,
   inject,
   signal,
-  OnChanges,
   input,
   resource
 } from '@angular/core';
